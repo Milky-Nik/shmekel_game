@@ -1,0 +1,75 @@
+[gd_scene format=3 uid="uid://7sexe4xcix7d"]
+
+[ext_resource type="Script" uid="uid://dvlkevh26jcu" path="res://character_body_3d.gd" id="1_a202f"]
+[ext_resource type="Texture2D" uid="uid://ddgc2016sfrgf" path="res://1449943049117870801.jpg" id="3_r3fl7"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_4xowi"]
+sky_top_color = Color(0.71924156, 0.7100045, 0.8662454, 1)
+sky_horizon_color = Color(0.9766026, 0.9665433, 0.99660355, 1)
+ground_horizon_color = Color(0.9766026, 0.9665433, 0.99660355, 1)
+
+[sub_resource type="Sky" id="Sky_a202f"]
+sky_material = SubResource("ProceduralSkyMaterial_4xowi")
+
+[sub_resource type="Environment" id="Environment_noarx"]
+background_mode = 2
+sky = SubResource("Sky_a202f")
+tonemap_mode = 2
+glow_enabled = true
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_4xowi"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_noarx"]
+albedo_texture = ExtResource("3_r3fl7")
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_a202f"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_noarx"]
+size = Vector3(40, 1.0703125, 40)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_i5arm"]
+albedo_texture = ExtResource("3_r3fl7")
+uv1_scale = Vector3(10, 10, 10)
+
+[sub_resource type="BoxMesh" id="BoxMesh_a0tk4"]
+size = Vector3(40, 1, 40)
+
+[sub_resource type="Skin" id="Skin_r3fl7"]
+
+[node name="Node3D" type="Node3D" unique_id=756163408]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=487442821]
+environment = SubResource("Environment_noarx")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=1508231522]
+transform = Transform3D(-0.8660254, -0.43301278, 0.25, 0, 0.49999997, 0.86602545, -0.50000006, 0.75, -0.43301266, 0, 0, 0)
+shadow_enabled = true
+
+[node name="CharacterBody3D" type="CharacterBody3D" parent="." unique_id=1726104226]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.1749563, 0)
+script = ExtResource("1_a202f")
+gravity = -200
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="CharacterBody3D" unique_id=1568157541]
+shape = SubResource("CapsuleShape3D_4xowi")
+debug_color = Color(0, 0.4214817, 0.9762117, 0.41960785)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="CharacterBody3D" unique_id=391943101]
+material_override = SubResource("StandardMaterial3D_noarx")
+mesh = SubResource("CapsuleMesh_a202f")
+
+[node name="Camera3D" type="Camera3D" parent="CharacterBody3D" unique_id=840600573]
+transform = Transform3D(0.99912727, -1.8610196e-09, -0.041771032, 0.020959342, 0.8650026, 0.5013295, 0.03613205, -0.5017674, 0.8642477, -0.08210039, 2.2558184, 2.3112316)
+
+[node name="StaticBody3D" type="StaticBody3D" parent="." unique_id=883917493]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D" unique_id=450069844]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
+shape = SubResource("BoxShape3D_noarx")
+debug_color = Color(0.91364044, 0.16047409, 0.6076997, 0.41960785)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="StaticBody3D" unique_id=1971971841]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.54321647, 0)
+material_override = SubResource("StandardMaterial3D_i5arm")
+mesh = SubResource("BoxMesh_a0tk4")
+skin = SubResource("Skin_r3fl7")
